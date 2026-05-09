@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>母亲节快乐</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 100vw; height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    .petals {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .envelope-btn {
+      width: 200px; height: 200px;
+      background: #fff0f5;
+      border-radius: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      cursor: pointer;
+      z-index: 10;
+      font-size: 60px;
+      transition: transform 0.3s;
+    }
+    .envelope-btn:active { transform: scale(0.95); }
+    .envelope-text {
+      margin-top: 8px;
+      font-size: 18px;
+      color: #d81b60;
+      letter-spacing: 2px;
+    }
+    .card {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      z-index: 10;
+      animation: fadeInUp 1s ease;
+      padding: 20px;
+    }
+    .card img {
+      width: 200px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .card h1 {
+      font-size: 36px;
+      color: #c2185b;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    .card .message {
+      font-size: 20px;
+      color: #ad1457;
+      background: rgba(255,255,255,0.7);
+      padding: 20px 30px;
+      border-radius: 20px;
+      margin: 10px 0;
+      backdrop-filter: blur(10px);
+      max-width: 280px;
+    }
+    .card .footer {
+      font-size: 16px;
+      color: #880e4f;
+      margin-top: 20px;
+      opacity: 0.8;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .petal {
+      position: absolute;
+      font-size: 30px;
+      animation: fall linear forwards;
+      pointer-events: none;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="petals" id="petalsContainer"></div>
+
+  <div class="envelope-btn" id="envelopeBtn">
+    💌
+    <span class="envelope-text">点击开启</span>
+  </div>
+
+  <div class="card" id="card">
+    <!-- 照片（确保仓库里有 mom.jpeg，否则换成你的文件名） -->
+    <img src="mom.jpeg" alt="妈妈和我">
+    <h1>妈妈，母亲节快乐</h1>
+    <div class="message" id="customMessage">
+      谢谢你做我的妈妈<br>
+      是我这辈子最大的幸运<br>
+      愿你永远健康、美丽
+    </div>
+    <div class="footer">永远爱你的程程 ❤️</div>
+  </div>
+
+  <script>
+    (function() {
+      var envelopeBtn = document.getElementById('envelopeBtn');
+      var card = document.getElementById('card');
+      var petalsContainer = document.getElementById('petalsContainer');
+      var customMessage = document.getElementById('customMessage');
+
+      // 修改祝福语请改这里（<br> 是换行）
+      customMessage.innerHTML = '谢谢你做我的妈妈<br>是我这辈子最大的幸运<br>愿你永远健康、美丽';
+
+      function startPetals() {
+        setInterval(function() {
+          var petal = document.createElement('div');
+          petal.classList.add('petal');
+          petal.innerHTML = '❤️';
+          petal.style.left = Math.random() * 100 + '%';
+          petal.style.fontSize = (Math.random() * 20 + 20) + 'px';
+          petal.style.animationDuration = (Math.random() * 4 + 3) + 's';
+          petal.style.color = 'hsl(' + (Math.random() * 30 + 340) + ', 80%, 70%)';
+          petalsContainer.appendChild(petal);
+          setTimeout(function() { petal.remove(); }, 7000);
+        }, 400);
+      }
+
+      envelopeBtn.addEventListener('click', function() {
+        envelopeBtn.style.display = 'none';
+        card.style.display = 'flex';
+        startPetals();
+      });
+    })();
+  </script>
+</body>
+</html>
